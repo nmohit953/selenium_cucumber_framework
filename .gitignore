@@ -1,0 +1,9 @@
+.idea/
+target/
+*.iml
+*.class
+logs/
+reports/
+*.log
+.settings/
+.vscode/
