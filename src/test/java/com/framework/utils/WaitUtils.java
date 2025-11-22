@@ -18,4 +18,7 @@ public class WaitUtils {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
         wait.until(ExpectedConditions.titleContains(title));
     }
+   
+        
+    
 }

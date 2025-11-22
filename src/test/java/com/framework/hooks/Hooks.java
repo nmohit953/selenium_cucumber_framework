@@ -2,10 +2,13 @@ package com.framework.hooks;
 
 import com.framework.utils.DriverFactory;
 import com.framework.utils.ExtentManager;
+import com.framework.utils.SoftAssertManager;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
+import org.testng.asserts.SoftAssert;
+
 import io.cucumber.java.*;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -20,6 +23,8 @@ public class Hooks {
 
     @After
     public void tearDown() {
+    
+    	SoftAssertManager.assertAll();
         DriverFactory.quitDriver(); // quit WebDriver after scenario
     }
 }

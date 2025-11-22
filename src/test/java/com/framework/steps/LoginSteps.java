@@ -2,9 +2,12 @@ package com.framework.steps;
 
 import com.framework.utils.DriverFactory;
 import com.framework.utils.PropertiesReader;
+import com.framework.utils.SoftAssertManager;
 import com.framework.pages.LoginPage;
 
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
+
 import io.cucumber.java.en.*;
 
 public class LoginSteps {
@@ -17,13 +20,22 @@ public class LoginSteps {
         DriverFactory.getDriver().get(url);
     }
 
-    @When("user logs in with valid credentials")
-    public void user_logs_in() {
-        login.login("standard_user","secret_sauce");
+    @When("user enters {string} and {string}")
+    public void user_logs_in(String Username, String Password) {
+        login.login(Username,Password);
     }
 
-    @Then("user should be redirected to the products page")
-    public void verify_products_page() {
-        Assert.assertTrue(DriverFactory.getDriver().getCurrentUrl().contains("inventory"));
+    @Then("login should {string}")
+    public void verify_products_page(String Result) {
+    	
+    	if(Result.equalsIgnoreCase("Success")) {
+    		SoftAssert softAssert = SoftAssertManager.getSoftAssert();
+    		softAssert.assertTrue(DriverFactory.getDriver().getTitle().equalsIgnoreCase("Swag Labs"));
+        	}
+        else {
+        	
+        		System.out.println(login.getErrorMessage());
+        		
+        	}
     }
 }

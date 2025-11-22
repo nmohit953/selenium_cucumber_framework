@@ -16,6 +16,9 @@ public class LoginPage {
 
     @FindBy(id = "login-button")
     private WebElement loginBtn;
+    
+    @FindBy(xpath = "//div[@class='error-message-container error']")
+    private WebElement loginErrorMessage;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -27,4 +30,10 @@ public class LoginPage {
         password.sendKeys(pass);
         loginBtn.click();
     }
+
+	public String getErrorMessage() {
+		// TODO Auto-generated method stub
+		return loginErrorMessage.getText();
+		
+	}
 }
